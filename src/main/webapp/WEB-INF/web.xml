@@ -25,7 +25,10 @@
 		<servlet-name>DeleteServlet</servlet-name>
 		<servlet-class>fr.gtm.blog.web.DeleteServlet</servlet-class>
 	</servlet>
-
+	<servlet>
+		<servlet-name>autowiredServlet</servlet-name>
+		<servlet-class>fr.gtm.blog.web.autowiredServlet</servlet-class>
+	</servlet>
 	<!-- Lien entre une Servlet Java et un ou plusieurs modèle d'URL qui permettra 
 		d'activer ses méthodes doGet/doPost/doPut/doDelete... -->
 	<servlet-mapping>
@@ -52,7 +55,18 @@
 	<filter-mapping>
 		<filter-name>Filtre Authentification</filter-name>
 		<url-pattern>/helloworld</url-pattern>
-		<url-pattern>/articles/*</url-pattern>
+		<url-pattern>/articles/</url-pattern>
 		<url-pattern>/manage</url-pattern>
 	</filter-mapping>
+	
+	<context-param>
+		<description>Configuration Spring : indiquer l'emplacement du fichier de configuration spring beans</description>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:///spring-dispatcher-servlet.xml</param-value>
+	</context-param>
+	
+    <!-- Bootstrap the root application context as usual using ContextLoaderListener -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
 </web-app>

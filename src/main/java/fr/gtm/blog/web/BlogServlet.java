@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
  * Point d'entrée dans l'application par l'URL '/helloworld'. Permet de traiter
  * les requêtes HTTP en fournissant pour chaque demande un objet de réponse.
  */
-public class BlogServlet extends HttpServlet {
+public class BlogServlet extends AutowiredServlet {
 
 	private static final long serialVersionUID = 1L;
 
