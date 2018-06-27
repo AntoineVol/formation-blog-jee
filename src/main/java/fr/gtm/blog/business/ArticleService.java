@@ -1,54 +1,41 @@
 package fr.gtm.blog.business;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import fr.gtm.blog.dao.ArticleRepository;
 import fr.gtm.blog.domain.Article;
 
+@Service
 public class ArticleService {
 
-
-	private static final List<Article> MOCK_ARTICLES = Collections
-			.unmodifiableList(Arrays.asList(
-					new Article[] { new Article(0, "Article n°1", "DESCR"),
-							new Article(1, "Article n°2", "DESCR"),
-							new Article(2, "Article n°3", "DESCR") }));
-
-	private int idCount;
-	private final List<Article> articles;
-
-	public ArticleService(int idCount) {
-		this.idCount = idCount;
-		this.articles = new ArrayList<>();
-		// FIXME: A supprimer lorsque l'accès BDD est implémenté.
-		this.articles.addAll(ArticleService.MOCK_ARTICLES);
-	}
+	@Autowired
+	private ArticleRepository repo;
 
 	public Article create(final String title, final String description) {
-		final Article result = new Article();
-		result.setId(this.idCount++);
-		result.setTitle(title);
-		result.setDescription(description);
-		this.articles.add(result);
-		return result;
+		return this.save(new Article(title, description));
 	}
 
 	public List<Article> getArticles() {
-		return articles;
+		return this.repo.findAll();
 	}
 
 	public void delete(int id) {
-		Article toDelete = null;
-		for (Article a : this.articles) {
-			if (a.getId().equals(id)) {
-				toDelete = a;
-				break;
-			}
+		this.repo.deleteById(id);
+		;
+	}
+
+	public Article edit(Article article) {
+		if (article.getId() == null) {
+			throw new IllegalArgumentException(
+					"Cannot update an article without its id.");
 		}
-		if (toDelete != null) {
-			this.articles.remove(toDelete);
-		}
+		return this.save(article);
+	}
+
+	private Article save(Article article) {
+		return this.repo.save(article);
 	}
 }

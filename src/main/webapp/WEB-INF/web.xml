@@ -12,10 +12,6 @@
 	<servlet>
 		<servlet-name>IndexServlet</servlet-name>
 		<servlet-class>fr.gtm.blog.web.IndexServlet</servlet-class>
-		<init-param>
-			<param-name>idCount</param-name>
-			<param-value>3</param-value>
-		</init-param>
 	</servlet>
 	<servlet>
 		<servlet-name>ArticleServlet</servlet-name>
@@ -48,7 +44,7 @@
 		<url-pattern>/delete</url-pattern>
 	</servlet-mapping>
 	
-	<filter>
+<!-- 	<filter>
 		<filter-name>Filtre Authentification</filter-name>
 		<filter-class>fr.gtm.blog.web.AuthFilter</filter-class>
 	</filter>
@@ -57,7 +53,7 @@
 		<url-pattern>/helloworld</url-pattern>
 		<url-pattern>/articles/</url-pattern>
 		<url-pattern>/manage</url-pattern>
-	</filter-mapping>
+	</filter-mapping> -->
 	
 	<context-param>
 		<description>Configuration Spring : indiquer l'emplacement du fichier de configuration spring beans</description>
