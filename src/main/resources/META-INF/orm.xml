@@ -8,7 +8,7 @@
 	xmlns="http://java.sun.com/xml/ns/persistence/orm"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd">
-	
+
 	<entity class="fr.gtm.blog.domain.Article">
 		<table name="article" />
 		<attributes>
@@ -18,6 +18,38 @@
 			</id>
 			<basic name="title"></basic>
 			<basic name="description"></basic>
+			<many-to-one name="author">
+				
+				<join-column name="author_id" referenced-column-name="id" />
+			</many-to-one>
+			
+		</attributes>
+	</entity>
+
+	<entity class="fr.gtm.blog.domain.Author">
+		<attributes>
+			<id name="id">
+				<generated-value strategy="IDENTITY" />
+			</id>
+			<basic name="name" />
+			<basic name="subDate" />
+			<basic name="adress" />
+			<one-to-many name="listArticle" mapped-by="author"></one-to-many>
+
+			<one-to-one name="adress">
+				<join-column name="address_id"
+					referenced-column-name="id" />
+			</one-to-one>
+		</attributes>
+	</entity>
+	<entity class="fr.gtm.blog.domain.Adress">
+		<attributes>
+			<id name="id">
+				<generated-value strategy="IDENTITY" />
+			</id>
+			<basic name="city" />
+			<basic name="postalCode" />
+			<basic name="line" />
 		</attributes>
 	</entity>
 </entity-mappings>
