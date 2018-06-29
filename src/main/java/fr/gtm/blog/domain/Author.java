@@ -14,6 +14,12 @@ public class Author implements Entity, Serializable{
 	private Adress adress;
 	private List<Article> listArticle;
 	
+	public Author() {
+		
+	}
+	public Author(String name) {
+		this.name=name;
+	}
 	public Integer getId() {
 		return id;
 	}

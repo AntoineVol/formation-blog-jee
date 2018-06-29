@@ -4,65 +4,26 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
 		 http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	version="3.1">
-	<!-- Description d'une servlet avec association à la classe Java. -->
+	<!-- -->
 	<servlet>
-		<servlet-name>BlogServlet</servlet-name>
-		<servlet-class>fr.gtm.blog.web.BlogServlet</servlet-class>
+		<servlet-name>spring-dispatcher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
 	</servlet>
-	<servlet>
-		<servlet-name>IndexServlet</servlet-name>
-		<servlet-class>fr.gtm.blog.web.IndexServlet</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>ArticleServlet</servlet-name>
-		<servlet-class>fr.gtm.blog.web.ArticleServlet</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>DeleteServlet</servlet-name>
-		<servlet-class>fr.gtm.blog.web.DeleteServlet</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>autowiredServlet</servlet-name>
-		<servlet-class>fr.gtm.blog.web.autowiredServlet</servlet-class>
-	</servlet>
-	<!-- Lien entre une Servlet Java et un ou plusieurs modèle d'URL qui permettra 
-		d'activer ses méthodes doGet/doPost/doPut/doDelete... -->
+
+	<!-- -->
 	<servlet-mapping>
-		<servlet-name>BlogServlet</servlet-name>
-		<url-pattern>/helloworld</url-pattern>
+		<servlet-name>spring-dispatcher</servlet-name>
+		<url-pattern>*.html</url-pattern>
 	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>IndexServlet</servlet-name>
-		<url-pattern>/articles</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>ArticleServlet</servlet-name>
-		<url-pattern>/manage</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>DeleteServlet</servlet-name>
-		<url-pattern>/delete</url-pattern>
-	</servlet-mapping>
-	
-<!-- 	<filter>
-		<filter-name>Filtre Authentification</filter-name>
-		<filter-class>fr.gtm.blog.web.AuthFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>Filtre Authentification</filter-name>
-		<url-pattern>/helloworld</url-pattern>
-		<url-pattern>/articles/</url-pattern>
-		<url-pattern>/manage</url-pattern>
-	</filter-mapping> -->
-	
-	<context-param>
+
+
+
+
+<!-- 	<init-param>
 		<description>Configuration Spring : indiquer l'emplacement du fichier de configuration spring beans</description>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:///spring-dispatcher-servlet.xml</param-value>
-	</context-param>
-	
-    <!-- Bootstrap the root application context as usual using ContextLoaderListener -->
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
+	</init-param> -->
+
 </web-app>
