@@ -1,6 +1,7 @@
 package fr.gtm.blog.business;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -31,6 +32,15 @@ public abstract class CrudService<ENTITY extends Entity> {
 	public void delete(Integer id) {
 		this.repo.deleteById(id);
 		;
+	}
+	public ENTITY read(Integer id) {
+		ENTITY result = null;
+		final Optional<ENTITY> entity = this.repo.findById(id);
+		if(entity.isPresent()) {
+			result = entity.get();
+		}
+		return result;
+		
 	}
 
 	public ENTITY edit(ENTITY entity) {

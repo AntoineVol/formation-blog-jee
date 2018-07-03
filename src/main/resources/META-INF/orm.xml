@@ -19,7 +19,6 @@
 			<basic name="title"></basic>
 			<basic name="description"></basic>
 			<many-to-one name="author">
-				
 				<join-column name="author_id" referenced-column-name="id" />
 			</many-to-one>
 			

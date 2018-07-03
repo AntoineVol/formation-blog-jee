@@ -2,6 +2,8 @@ package fr.gtm.blog.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,18 +25,33 @@ public class IndexController {
 		return mav ;
 	}
 	
-	@RequestMapping("/manage")
-	public ModelAndView manage () {	
+	@GetMapping("/manage")
+	public ModelAndView addArticle() {
+		final ModelAndView mav  = new ModelAndView("article");
+		mav.getModel().put("modelArticle", new Article());
+		return mav;
+	}
+	@GetMapping("/update")
+	public ModelAndView updateArticle(@RequestParam Integer id) {
 		final ModelAndView mav = new ModelAndView("article");
-		return mav ;
+		mav.getModel().put("modelArticle", this.service.read(id));
+		return mav;
 	}
 	
-	@PostMapping("/manage")
-	public ModelAndView submit(@RequestParam String title , @RequestParam ("descr") String content) {
-		Article entity = new Article();
-		entity.setTitle(title);
-		entity.setDescription(content);;
-		this.service.create(entity);
+	@PostMapping({"/manage","/update"})
+	public String validateArticle(@ModelAttribute Article modelArticle) {
+		if(modelArticle.getId()==null) {
+			this.service.create(modelArticle);
+		}else {
+			this.service.edit(modelArticle);
+		}
+		return "redirect:/index.html";
+	}
+	
+	
+	@RequestMapping
+	public ModelAndView delete(Integer id) {
+		this.service.delete(id);
 		return article();
 	}
 }
